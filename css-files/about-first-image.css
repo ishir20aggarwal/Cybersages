@@ -1,0 +1,188 @@
+body {
+  padding-top: 70px;
+}
+
+.w3-content {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.w3-section {
+  background-color: rgb(35, 75, 105);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.mySlides {
+  display: none;
+  width: 100%;
+  height: auto;
+}
+
+.w3-button {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  font-size: 30px;
+  cursor: pointer;
+  background-color: #D16C00;
+  color: white;
+  border: none;
+  transition: 0.30s;
+}
+
+.w3-button:hover {
+  background-color: rgb(35, 75, 105);
+  color: lightgrey;
+}
+
+.w3-display-left {
+  left: 10px;
+}
+
+.w3-display-right {
+  right: 10px;
+}
+
+  .mission-statement-container {
+    display: grid;
+    grid-template-rows: auto;
+    background-color: rgb(21, 89, 145);
+  }
+
+  .mission-statement-container h1 {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 20px;
+  }
+
+  .mission-statement-container p {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-left: 60px;
+    margin-right: 60px;
+    line-height: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .what-is-first-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .what-is-first-container h1 {
+    display: flex;
+    justify-content: center;
+    color: white;
+    align-items: end;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .what-is-first-container p {
+    display: flex;
+    justify-content: center;
+    color: white;
+    margin-left: 60px;
+    margin-right: 60px;
+    line-height: 25px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .about-ftc-container {
+    margin-top: 15%;
+  }
+
+  .what-is-content {
+    margin-top: 60px;
+    margin-bottom: 60px;
+  }
+
+  .learn-more-container {
+    background-color: rgb(37, 99, 150);
+    display: grid;
+    grid-template-rows: auto auto;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
+    width: 80%;
+    border-radius: 100px;
+  }
+
+  .learn-more {
+    color: white;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial;
+    margin-top: 20px;
+    text-align: center;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .learn-more-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .learn-more-button {
+    padding: 10px 24px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: #D16C00; 
+    transition: all  0.3s;
+    border-radius: 50px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+
+  .learn-more-button:hover {
+    background-color: rgb(35, 75, 105); 
+    color: lightgrey; 
+    text-shadow: none;
+  }
+
+  @media(max-width: 1650px) {
+    .what-is-content {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+  }
+  
+  @media(max-width: 1125px) {
+    .w3-section {
+      grid-template-columns: none;
+      grid-template-rows: auto auto;
+    }
+
+    .about-ftc-container {
+      margin-top: 30px;
+    }
+
+    .what-is-content {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (min-width: 351px) and (max-width: 750px) {
+    .learn-more {
+      font-size: 18px;
+    }
+
+    .learn-more-container {
+      width: 100%;
+    }
+  }
+
+
+  
