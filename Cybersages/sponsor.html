@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponsor - Cyber Sages Robotics</title>
+
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Slab:wght@500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #070b16;
+            --surface: #0b1224;
+            --surface-soft: #0f1a36;
+            --text: #ffffff;
+            --muted: rgba(255,255,255,0.68);
+            --line: rgba(255,255,255,0.11);
+            --accent: #3b82f6;
+            --accent-hover: #60a5fa;
+            --radius: 16px;
+            --shadow: 0 20px 60px rgba(0,0,0,0.48);
+            --transition: 0.28s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.68;
+            min-height: 100vh;
+            padding-top: 65px;
+        }
+
+        a { color: inherit; text-decoration: none; }
+
+        .container { max-width: 1240px; margin: 0 auto; padding: 0 24px; width: 100%; }
+
+        header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; }
+
+        .nav {
+            height: 80px;
+            background: rgba(7,11,22,0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+
+        .nav-left { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+        .nav-left:hover { transform: scale(1.05); transition: var(--transition); }
+
+        .nav-logo { width: 65px; height: 65px; object-fit: contain; background: transparent !important; }
+
+        .team-number {
+            font-weight: 700;
+            font-size: 2rem;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .nav-right { display: flex; align-items: center; gap: 24px; flex-shrink: 0; }
+
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links li { display: flex; align-items: center; }
+        .nav-links a {
+            font-weight: 500;
+            color: var(--muted);
+            transition: var(--transition);
+            position: relative;
+            white-space: nowrap;
+        }
+        .nav-links a:hover { color: var(--text); }
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -6px;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        .sponsor-btn {
+            padding: 10px 24px;
+            border-radius: 12px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            color: white;
+            font-weight: 700;
+            box-shadow: 0 8px 24px rgba(59,130,246,0.3);
+            transition: var(--transition);
+        }
+        .sponsor-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 36px rgba(59,130,246,0.45);
+        }
+        .sponsor-btn::after { display: none; }
+
+        .hamburger { display: none; flex-direction: column; gap: 6px; cursor: pointer; flex-shrink: 0; }
+        .hamburger span { width: 28px; height: 2.5px; background: var(--text); border-radius: 2px; transition: var(--transition); }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 80px; left: 0; right: 0;
+            background: var(--surface);
+            border-bottom: 1px solid var(--line);
+            padding: 0;
+            text-align: center;
+        }
+        .mobile-menu a {
+            display: block;
+            padding: 14px 0;
+            font-weight: 500;
+            color: var(--muted);
+            border-top: 1px solid var(--line);
+            margin: 0;
+            white-space: nowrap;
+        }
+        .mobile-menu a:first-child { border-top: none; }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu a:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+
+        /* SECTIONS */
+        .section {
+            padding: 60px 0 100px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s ease, transform 0.9s ease;
+            text-align: center;
+        }
+        .section.visible { opacity: 1; transform: none; }
+        .section-alt { background: var(--surface-soft); }
+
+        /* Added: a slightly different section background that still matches your palette */
+        .section-soft {
+            background: linear-gradient(180deg, rgba(15,26,54,0.92), rgba(11,18,36,0.92));
+        }
+
+        .section-title {
+            font-family: 'Roboto Slab', serif;
+            font-size: clamp(2.4rem, 5vw, 3.4rem);
+            font-weight: 700;
+            margin-bottom: 2.5rem;
+            color: var(--text);
+        }
+
+        .section-text, .donate-text {
+            max-width: 820px;
+            margin: 0 auto 2.2rem;
+            font-size: 1.22rem;
+            color: var(--muted);
+            line-height: 1.78;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 64px 40px;
+            box-shadow: var(--shadow);
+            max-width: 860px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Added: card variant for the donate section (same scheme, just a touch different) */
+        .card-soft {
+            background: rgba(11,18,36,0.78);
+            border: 1px solid rgba(96,165,250,0.22);
+            box-shadow: 0 22px 70px rgba(0,0,0,0.52);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .donate-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 16px 48px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+            color: white;
+            font-size: 1.15rem;
+            font-weight: 700;
+            border-radius: 12px;
+            box-shadow: 0 12px 32px rgba(59,130,246,0.35);
+            transition: var(--transition);
+        }
+        .donate-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 48px rgba(59,130,246,0.5);
+        }
+
+        /* Added: donate button variant that stays blue, but is visually distinct */
+        .donate-button-soft {
+            background: linear-gradient(90deg, #2563eb, #60a5fa);
+            box-shadow: 0 12px 34px rgba(96,165,250,0.28);
+        }
+        .donate-button-soft:hover {
+            box-shadow: 0 22px 56px rgba(96,165,250,0.38);
+        }
+
+        /* Sponsor grid */
+        .sponsor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-top: 2.5rem;
+        }
+        .sponsor-item { text-align: center; }
+
+        /* Added: sponsor hover animation (no new colors, same scheme) */
+        .sponsor-item a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            background: rgba(11,18,36,0.55);
+            box-shadow: 0 10px 34px rgba(0,0,0,0.28);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background var(--transition);
+        }
+        .sponsor-item a:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 18px 52px rgba(0,0,0,0.46);
+            border-color: rgba(96,165,250,0.35);
+            background: rgba(15,26,54,0.75);
+        }
+        .sponsor-item img {
+            width: 180px;
+            height: auto;
+            max-height: 120px;
+            object-fit: contain;
+            margin-bottom: 0;
+            transition: transform var(--transition), filter var(--transition);
+        }
+        .sponsor-item a:hover img {
+            transform: scale(1.05);
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        /* Tier grid */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 3rem;
+        }
+        .tier-card img {
+            width: 140px;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto 1.5rem;
+        }
+        .tier-card h3, .tier-card .price {
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+        .tier-card .price { font-size: 2.2rem; font-weight: 700; }
+
+        /* FOOTER */
+        footer {
+            background: #05080f;
+            border-top: 1px solid var(--line);
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr 1fr 1fr;
+            gap: 48px;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+            justify-items: center;
+        }
+        .footer-logo { width: 140px; margin-bottom: 1.2rem; }
+        .footer-col h4 { font-family: 'Roboto Slab', serif; font-size: 1.3rem; margin-bottom: 1.4rem; }
+        .footer-col a, .footer-col p { display: block; color: var(--muted); margin-bottom: 0.9rem; transition: var(--transition); }
+        .footer-col a:hover { color: var(--text); }
+
+        /* RESPONSIVE */
+        @media (max-width: 960px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .footer-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 680px) {
+            .container { padding: 0 20px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .section { padding: 100px 0 70px; }
+            .card { padding: 48px 24px; }
+            .sponsor-grid, .tier-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .nav { height: 70px; }
+            .nav-inner { height: 70px; }
+            .mobile-menu { top: 70px; }
+            .nav-logo { width: 42px; height: 42px; }
+            .team-number { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="nav">
+        <div class="container nav-inner">
+            <a href="https://cybersages.net/" class="nav-left">
+                <img src="images/logo.png" class="nav-logo" alt="Cyber Sages Logo">
+                <span class="team-number">#23541</span>
+            </a>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="https://cybersages.net/past-years">Past Years</a></li>
+                    <li><a href="https://cybersages.net/learn">Learn</a></li>
+                    <li><a href="https://cybersages.net/outreach">Outreach</a></li>
+                    <li><a href="https://cybersages.net/sponsor" class="sponsor-btn">Sponsor Us</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="https://cybersages.net/past-years">Past Years</a>
+            <a href="https://cybersages.net/learn">Learn</a>
+            <a href="https://cybersages.net/outreach">Outreach</a>
+            <a href="https://cybersages.net/sponsor">Sponsor Us</a>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Sponsors</h2>
+            <div class="sponsor-grid">
+                <div class="sponsor-item"><a href="https://www.thundercattech.com/" target="_blank" rel="noopener"><img src="https://media.licdn.com/dms/image/v2/D4E0BAQF76AUv_nLA-Q/company-logo_200_200/company-logo_200_200/0/1685557539143/thundercat_technology_logo?e=2147483647&v=beta&t=8jp8g4X25RRuIewDDu1rjV9V-HTpwiinlqA9g7kwWq0" alt="ThunderCat Technology"></a></div>
+                <div class="sponsor-item"><a href="https://www.vivsoftgov.com/" target="_blank" rel="noopener"><img src="https://pbs.twimg.com/profile_images/1486394537165606916/uvNAINBE_400x400.jpg" alt="Vivsoft"></a></div>
+                <div class="sponsor-item"><a href="https://www.ghaasfoundation.org/" target="_blank" rel="noopener"><img src="images/GHAAS.jpg" alt="GHAAS Foundation"></a></div>
+                <div class="sponsor-item"><a href="https://hackclub.com/" target="_blank" rel="noopener"><img src="images/HCB-Logo.png" alt="Hack Club"></a></div>
+                <div class="sponsor-item"><a href="https://www.chipotle.com/" target="_blank" rel="noopener"><img src="images/chipotle.jpg" alt="Chipotle"></a></div>
+                <div class="sponsor-item"><a href="https://www.gobilda.com/" target="_blank" rel="noopener"><img src="images/GoBuilda.jpg" alt="goBILDA"></a></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-alt">
+        <div class="container">
+            <h2 class="section-title">Donation Tiers</h2>
+            <div class="tier-grid">
+                <div class="card tier-card">
+                    <img src="images/Bronze.png" alt="Bronze Tier Badge">
+                    <h3>Bronze Tier</h3>
+                    <p class="price">$150</p>
+                    <p>- Social Media Shoutout</p>
+                    <p>- Website Recognition</p>
+                </div>
+                <div class="card tier-card">
+                    <img src="images/Silver.png" alt="Silver Tier Badge">
+                    <h3>Silver Tier</h3>
+                    <p class="price">$300</p>
+                    <p>- Social Media Shoutout</p>
+                    <p>- Website Recognition</p>
+                    <p>- Team Sticker Pack</p>
+                </div>
+                <div class="card tier-card">
+                    <img src="images/Gold.png" alt="Gold Tier Badge">
+                    <h3>Gold Tier</h3>
+                    <p class="price">$500+</p>
+                    <p>- Social Media Shoutout</p>
+                    <p>- Prominent Website Feature</p>
+                    <p>- Team Banner & T-Shirts</p>
+                    <p>- Invitation to Events</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Updated: same overall scheme, but clearly different background/card/button from the section above -->
+<section class="section">
+    <div class="container">
+        <h2 class="section-title">Invest in Our Team</h2>
+        <div class="card" style="background: var(--surface-soft);">
+            <p class="donate-text">
+                Your contribution helps Cyber Sages Robotics cover robot parts, competition fees, travel, and STEM outreach programs for our members.
+            </p>
+            <a href="https://drive.google.com/file/d/1NMDiQMQuErI1Gu8TnqWMJtR-8S6rnB_N/view?usp=sharing"
+               target="_blank"
+               rel="noopener"
+               class="donate-button">
+                Click to Donate
+            </a>
+            <p style="margin-top: 1.5rem; font-size: 1rem; color: var(--muted);">
+                <a href="https://drive.google.com/file/d/1rcfT2V-I3fRfPoaZqs2pXea7ocQl4qPy/view?usp=sharing"
+                   target="_blank"
+                   style="color: var(--accent);">
+                    View Full Sponsorship Packet
+                </a>
+            </p>
+        </div>
+    </div>
+</section>
+
+
+</main>
+
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <img src="favicon.png" class="footer-logo" alt="Cyber Sages Logo">
+        </div>
+        <div class="footer-col">
+            <h4>Useful Links</h4>
+            <a href="https://cybersages.net/">Home</a>
+            <a href="https://cybersages.net/past-years">Past Years</a>
+            <a href="https://cybersages.net/learn">Learn</a>
+            <a href="https://cybersages.net/sponsor">Sponsor Us</a>
+        </div>
+        <div class="footer-col">
+            <h4>Contact Us</h4>
+            <a href="mailto:cybersagesrobotics@gmail.com">cybersagesrobotics@gmail.com</a>
+            <p>571-267-0266</p>
+        </div>
+        <div class="footer-col">
+            <h4>Learn More</h4>
+            <a href="https://cybersages.net/learn" target="_blank" rel="noopener">Resources</a>
+            <a href="https://www.firstinspires.org/" target="_blank" rel="noopener">FIRST Robotics</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+        mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Scroll reveal animation
+    const sections = document.querySelectorAll('.section');
+    const revealSection = () => {
+        const triggerBottom = window.innerHeight * 0.85;
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            if (sectionTop < triggerBottom) section.classList.add('visible');
+        });
+    };
+    window.addEventListener('scroll', revealSection);
+    revealSection();
+</script>
+
+</body>
+</html>
